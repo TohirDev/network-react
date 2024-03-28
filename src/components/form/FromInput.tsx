@@ -1,27 +1,33 @@
+import { FieldValues } from "react-hook-form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
+import { Input } from "../ui/input";
 import { IFormItem } from "@/types";
-import { Controller, FieldValues } from "react-hook-form";
-import { Input, InputProps } from "../ui/input";
 
 export const FormInput = <T extends FieldValues>({
   control,
-  name,
-  rules,
-  required,
-  ...props
-}: IFormItem<T> & Omit<InputProps, "name">) => {
+  formDesc,
+  formName,
+  placeHolder,
+  type,
+}: IFormItem<T>) => {
   return (
-    <Controller
-      {...{ control, name, rules: { required, ...rules } }}
-      render={({ field, fieldState: { error } }) => (
-        <>
-          <Input
-            {...props}
-            {...field}
-            value={field.value ?? props.defaultValue ?? ""}
-            className={error ? "error" : ""}
-          />
-          {error && <span>{error?.message}</span>}
-        </>
+    <FormField
+      control={control}
+      name={formName}
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Input placeholder={placeHolder} type={type} {...field} />
+          </FormControl>
+          <FormDescription>{formDesc}</FormDescription>
+          <FormMessage />
+        </FormItem>
       )}
     />
   );

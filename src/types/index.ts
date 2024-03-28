@@ -1,13 +1,10 @@
-import {
-  Control,
-  FieldValues,
-  Path,
-  RegisterOptions,
-} from "react-hook-form";
+import { HTMLInputTypeAttribute } from "react";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 export interface IFormItem<T extends FieldValues> {
   control: Control<T>;
-  name: Path<T>;
-  rules?: Omit<RegisterOptions<T>, "onChange" | "onBlur">;
-  required?: boolean;
+  formName: Path<T>;
+  formDesc: string;
+  placeHolder: string;
+  type?: HTMLInputTypeAttribute | undefined;
 }

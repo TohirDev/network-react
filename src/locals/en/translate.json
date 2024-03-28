@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome my friend",
+  "home-page": "Home Page",
+  "home-login": "Go to login page",
+  "login-title": "Welcome, sign in to post your thoughts",
+  "login-username": "This is your public display name.",
+  "login-password": "This is your password",
+  "login-ps-char": "password must include number and symbol(!@#$)",
+  "login-ps-num": "password must be at least 4 chars",
+  "login-valid-username": "username must be at least 4 chars"
+}

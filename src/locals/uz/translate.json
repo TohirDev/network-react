@@ -1,0 +1,11 @@
+{
+  "welcome": "Salom, Xush kelibsiz",
+  "home-page": "Bosh sahifa",
+  "home-login": "Login sahifasiga borish",
+  "login-title": "Xush kelibsiz, post yozish uchun login qiling",
+  "login-username": "Bu sizning ismingiz(username).",
+  "login-password": "Bu sizning parolingiz",
+  "login-ps-char": "parol raqam va simvollardan tashkil topishi kerak(!@#$)",
+  "login-ps-num": "parol kamida 4 ta harfdan tashkil topishi kerak",
+  "login-valid-username": "ism(username) kamida 4 ta harfdan tashkil topishi kerak"
+}

@@ -13,9 +13,9 @@ export const Header = () => {
       }}
     >
       <div>
-        <h1 style={{ fontFamily: "fantasy", fontSize: "25px" }}>
+        <span style={{ fontFamily: "fantasy", fontSize: "25px" }}>
           <NavLink to={"/"}>Network</NavLink>
-        </h1>
+        </span>
       </div>
       <div
         style={{

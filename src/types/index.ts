@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 import { Control, FieldValues, Path } from "react-hook-form";
 
 export interface IFormItem<T extends FieldValues> {
@@ -7,4 +7,12 @@ export interface IFormItem<T extends FieldValues> {
   formDesc: string;
   placeHolder: string;
   type?: HTMLInputTypeAttribute | undefined;
+  suffix?: ReactNode;
 }
+
+export type TLoginResult = {
+  is_confirmed: boolean;
+  token: string;
+  message: string;
+  status: number;
+};

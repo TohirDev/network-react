@@ -15,6 +15,7 @@ export const FormInput = <T extends FieldValues>({
   formName,
   placeHolder,
   type,
+  suffix,
 }: IFormItem<T>) => {
   return (
     <FormField
@@ -22,8 +23,14 @@ export const FormInput = <T extends FieldValues>({
       name={formName}
       render={({ field }) => (
         <FormItem>
-          <FormControl>
-            <Input placeholder={placeHolder} type={type} {...field} />
+          <FormControl className="w-[100%]">
+            <Input
+              className="mt-3 w-[100%]"
+              placeholder={placeHolder}
+              type={type}
+              {...field}
+              suffix={suffix}
+            />
           </FormControl>
           <FormDescription>{formDesc}</FormDescription>
           <FormMessage />

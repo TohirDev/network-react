@@ -11,20 +11,18 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form, FormLabel } from "@/components/ui/form";
 import { FormInput } from "@/components/form/FromInput";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import { Toaster } from "@/components/ui/toaster";
+import { EyeIcon, EyeOffIcon, UserRound } from "lucide-react";
+import { useSubmitLogin } from "./funcs";
 
 export const LoginPage = () => {
+  const [show, setShow] = useState(false);
   const { t } = useTranslation();
 
   const FormSchema = z.object({
@@ -47,15 +45,18 @@ export const LoginPage = () => {
       password: "",
     },
   });
+  const url = `${import.meta.env.VITE_BASE_API_URL}/signin`;
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
-  }
+  const onSubmit = useSubmitLogin();
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid place-items-center h-[100vh]">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          onSubmit(url, data);
+        })}
+      >
+        <div className="grid place-items-center h-[80vh]">
           <Card className="w-[350px] ">
             <CardHeader>
               <CardTitle>Login</CardTitle>
@@ -63,35 +64,58 @@ export const LoginPage = () => {
             </CardHeader>
             <CardContent>
               <FormLabel>Username</FormLabel>
-              <FormField
+              <FormInput
+                formDesc={t("login-username")}
                 control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input placeholder="username" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      {t("login-username")}
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                formName="username"
+                placeHolder="Username"
+                suffix={
+                  <UserRound className="mt-3 cursor-pointer select-none" />
+                }
               />
+
               <FormInput
                 control={form.control}
                 formDesc={t("login-password")}
                 formName="password"
                 placeHolder="Password"
-                type="password"
+                type={show ? "text" : "password"}
+                suffix={
+                  show ? (
+                    <EyeIcon
+                      className="mt-3 cursor-pointer select-none"
+                      onClick={() => setShow(false)}
+                    />
+                  ) : (
+                    <EyeOffIcon
+                      className="mt-3 cursor-pointer select-none"
+                      onClick={() => setShow(true)}
+                    />
+                  )
+                }
               />
             </CardContent>
-            <CardFooter>
-              <Button type="submit">Login</Button>
+            <CardFooter
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Button className="w-[100%]" type="submit">
+                Sign in
+              </Button>
+
+              <NavLink to={"/register"}>
+                <Button className="mt-3" type="button" variant={"link"}>
+                  Don't you have an account?
+                </Button>
+              </NavLink>
             </CardFooter>
           </Card>
         </div>
       </form>
+
+      <Toaster />
     </Form>
   );
 };

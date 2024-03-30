@@ -10,7 +10,7 @@ function HomePage() {
       <Button variant={"default"}>
         <NavLink to={"/login"}>{t("home-login")}</NavLink>
       </Button>
-      <h3>{t("home-page")}</h3>
+      <h2>{t("home-page")}</h2>
     </div>
   );
 }

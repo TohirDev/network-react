@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 function HomePage() {
   const { t } = useTranslation();
+
   return (
     <div>
       <h1>{t("welcome")}</h1>

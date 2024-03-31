@@ -14,12 +14,13 @@ import {
 import { Form, FormLabel } from "@/components/ui/form";
 import { FormInput } from "@/components/form/FromInput";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { Toaster } from "@/components/ui/toaster";
 import { EyeIcon, EyeOffIcon, UserRound } from "lucide-react";
 import { useSubmitLogin } from "./funcs";
+import { getTokenFromCookie } from "@/global";
 
 export const LoginPage = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +48,12 @@ export const LoginPage = () => {
   });
   const url = `${import.meta.env.VITE_BASE_API_URL}/signin`;
 
-  const onSubmit = useSubmitLogin();
+  const [onSubmit, { loading }] = useSubmitLogin();
+  const token = getTokenFromCookie();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token) navigate("/profile");
+  }, [token, navigate]);
 
   return (
     <Form {...form}>
@@ -101,8 +107,12 @@ export const LoginPage = () => {
                 flexDirection: "column",
               }}
             >
-              <Button className="w-[100%]" type="submit">
-                Sign in
+              <Button
+                className="w-[100%]"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Sign in"}
               </Button>
 
               <NavLink to={"/register"}>

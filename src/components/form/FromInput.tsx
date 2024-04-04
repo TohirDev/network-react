@@ -30,6 +30,7 @@ export const FormInput = <T extends FieldValues>({
               type={type}
               {...field}
               suffix={suffix}
+              accept={type === "file" ? "image/*" : ""}
             />
           </FormControl>
           <FormDescription>{formDesc}</FormDescription>

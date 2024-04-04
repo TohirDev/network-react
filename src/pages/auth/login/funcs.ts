@@ -18,7 +18,7 @@ export const useSubmitLogin = (): [
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const onSubmit = useCallback(
-    async (url: string, data: { username: string; password: string }) => {
+    async (url: string, data: unknown) => {
       try {
         setLoading(true);
         const response = await fetch(url, {
@@ -46,12 +46,16 @@ export const useSubmitLogin = (): [
           });
         }
       } catch (err) {
-        throw new Error((err as Error).message);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: (err as Error).message,
+        });
       } finally {
         setLoading(false);
       }
     },
-    [toast]
+    [navigate, toast]
   );
   return [onSubmit, { loading }];
 };

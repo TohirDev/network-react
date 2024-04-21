@@ -27,16 +27,8 @@ export const LoginPage = () => {
   const { t } = useTranslation();
 
   const FormSchema = z.object({
-    username: z.string().min(4, {
-      message: t("login-valid-username"),
-    }),
-    password: z
-      .string()
-      .min(4, t("login-ps-num"))
-      .regex(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])(?!.*\s)/,
-        t("login-ps-char")
-      ),
+    username: z.string(),
+    password: z.string(),
   });
 
   const form = useForm<z.infer<typeof FormSchema>>({

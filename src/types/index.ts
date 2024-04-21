@@ -1,11 +1,17 @@
 import { HTMLInputTypeAttribute, ReactNode } from "react";
-import { Control, FieldValues, Path } from "react-hook-form";
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  Path,
+  RegisterOptions,
+} from "react-hook-form";
 
 export interface IFormItem<T extends FieldValues> {
   control: Control<T>;
   formName: Path<T>;
   formDesc: string;
-  placeHolder: string;
+  placeHolder?: string;
   type?: HTMLInputTypeAttribute | undefined;
   suffix?: ReactNode;
 }
@@ -16,3 +22,10 @@ export type TLoginResult = {
   message: string;
   status: number;
 };
+
+export interface IFormControl<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
+  rules?: RegisterOptions<T, FieldPath<T>>;
+  required?: boolean;
+}
